@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sport_store</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <h1>sport_store</h1>
+    <form action="/products" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required><br>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required><br>
+        <label for="stockQuantity">Stock Quantity:</label>
+        <input type="number" id="stockQuantity" name="stockQuantity" required><br>
+        <label for="additionalInfo">Additional Info:</label>
+        <input type="text" id="additionalInfo" name="additionalInfo"><br>
+        <label for="storeID">Store ID:</label>
+        <input type="text" id="storeID" name="storeID" required><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br>
+        <label for="supplierID">Supplier ID:</label>
+        <input type="text" id="supplierID" name="supplierID" required><br>
+        <button type="submit">Create Product</button>
+    </form>
+    <form action="/search" method="get">
+        <input type="text" name="category" placeholder="Search by category">
+        <button type="submit">Search</button>
+    </form>
+    <form action="/sort" method="get">
+        <select name="order">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    <ul>
+        <% products.forEach(product => { %>
+            <li><%= product.name %> - <%= product.category %>
+                <a href="/products/<%= product._id %>">More</a>
+                <a href="/products/<%= product._id %>/edit">Edit</a>
+                <form action="/products/<%= product._id %>?_method=DELETE" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
